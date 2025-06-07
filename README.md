@@ -55,7 +55,7 @@ Projede JavaScript ile algoritma uygulanmış, HTML ve CSS ile kullanıcı dostu
 
 
 ## 🎥 Demo Videosu
-- YouTube'da izlemek için: [Demo Videosu]()
+- YouTube'da izlemek için: [Demo Videosu](https://youtu.be/z6vql8N5O7w)
 
 
 ## ✏️ Nasıl Çalıştırılır?
