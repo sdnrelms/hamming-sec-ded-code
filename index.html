@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Hamming SEC-DED Kod Simülatörü</title>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <h2>💻 Hamming SEC-DED Kod Simülatörü</h2>
+
+    <label>Bit uzunluğu (8, 16, 32): </label>
+    <select id="bitLength">
+      <option value="8">8 bit</option>
+      <option value="16">16 bit</option>
+      <option value="32">32 bit</option>
+    </select>
+
+    <label>Veri (0 ve 1'lerden oluşmalı): </label>
+    <input id="dataInput" type="text" />
+
+    <br />
+    <button onclick="createSecDed()">Hamming SEC-DED Kodunu Üret</button>
+
+    <label>Hata oluşturulacak bit pozisyonu/pozisyonları (ör: 4 veya 3,5):</label>
+    <input id="errorBits" type="text" />
+
+    <br />
+    <button onclick="addError()">Hata Oluştur</button>
+    <button onclick="detectAndFix()">Hata Tespit/Düzelt</button>
+
+    <h3>✅ Oluşturulan Orijinal Hamming SEC-DED Kodu:</h3>
+    <pre id="originalOutput"></pre>
+
+    <h3>❌ Hata Oluşturulmuş Kod (Bellek Okuması):</h3>
+    <pre id="hammingOutput"></pre>
+
+    <h3>✨ Tespit / Düzeltme Sonucu:</h3>
+    <pre id="correctOutput"></pre>
+  </div>
+
+</body>
+
+</html>
