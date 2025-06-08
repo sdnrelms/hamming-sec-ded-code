@@ -1,4 +1,3 @@
-
 # 💻 Hamming SEC-DED Kod Simülatörü
 
 ## 📌 Proje Özeti
@@ -8,7 +7,7 @@ Bu proje, **Hamming SEC-DED (Single Error Correction – Double Error Detection)
 - Belleğe yapay hata ekleyebilir,  
 - Hataları tespit edip düzeltebilir.
 
-Projede JavaScript ile algoritma uygulanmış, HTML ve CSS ile kullanıcı dostu bir arayüz geliştirilmiştir. Bilgisayar Mimarisi dersi kapsamında dönem projesi olarak hazırlanmıştır.
+Projede Hamming SEC-DED algoritması JavaScript ile implemente edilmiş, HTML ve CSS ile kullanıcı dostu bir arayüz geliştirilmiştir. Bilgisayar Mimarisi dersi kapsamında dönem projesi olarak hazırlanmıştır.
 
 
 ## 🚀 Özellikler
@@ -89,4 +88,62 @@ hamming-sec-ded-code/
 └── img/              # Ekran görüntüleri
 ```
 
+## 🔍 Teknik Detaylar
 
+####  🧠  Hamming SEC-DED Kod Nasıl Çalışır?
+Hamming SEC-DED (Single Error Correction - Double Error Detection) algoritması, bellek sistemlerinde veri güvenliğini sağlamak amacıyla kullanılan bir hata düzeltme yöntemidir.
+Bu algoritma sayesinde tek bitlik hatalar düzeltilir, çift bitlik hatalar ise tespit edilerek uyarı verilir.
+
+Temel prensipleri:
+
+🔹 Veriye parite bitleri eklenir.
+
+🔹 Her parite biti, belirli pozisyonlardaki verileri denetler (pozisyonlar ikili tabanda analiz edilir).
+
+🔹 Genel parite biti (overall parity) ile çift bit hataları tespit edilir.
+
+🔹 Syndrome analizi ile hata pozisyonu hesaplanır ve tek bitlik hata varsa düzeltilir.
+
+
+#### 🧮  Hamming Kodu Hesaplama Adımları
+
+
+###### 1. Parite Bit Sayısını Hesapla
+
+- Aşağıdaki formülde `m` veri biti sayısı, `r` parite biti sayısıdır. Formül, tüm bitlerin sığacağı minimum `r`'yi bulmak için kullanılır.
+
+   - ```2^r ≥ m + r + 1``` 
+
+###### 2. Veri ve Parite Bitlerini Yerleştir
+
+- Pozisyonları 1’den başlayarak sırala.
+- 2’nin kuvveti olan pozisyonlara (**1, 2, 4, 8...**) parite bitlerini (P1, P2, P4, ...) yerleştir.
+- Diğer pozisyonlara veri bitlerini yerleştir.
+
+###### 3. Parite Bitlerini Hesapla
+
+- Her parite biti, ikili gösterimde belirli bitleri kontrol eder.  
+  - **P1**: en sağdaki (1.) bit **1** olan pozisyonlar  
+  - **P2**: en sağdan ikinci (2.) bit **1** olan pozisyonlar  
+  - **P4**: en sağdan üçüncü (3.) bit **1** olan pozisyonlar  
+  - **P8**: en sağdan dördüncü (4.) bit **1** olan pozisyonlar  
+
+###### 4. Genel Parite Bitini Hesapla
+
+- Genel parite biti, tüm bitlerin XOR’lanmasıyla elde edilir.
+- Eğer hata tek bitlikse hem genel parite hem syndrome hata verir.
+- Ancak çift bitlik bir hata, parite bitleriyle tespit edilemeyebilir; bu durumda yalnızca genel parite hatalı olur ve veri güvenliğinin bozulduğu anlaşılır.
+
+
+
+#### 🪄 Hata Denetimi ve Düzeltme
+
+- Alıcı taraf veriyi okur ve parite bitleriyle birlikte **syndrome** değerini hesaplar.  
+- Syndrome ve genel parite biti sayesinde hata türü belirlenir:
+
+| Syndrome Değeri | Genel Parite | Açıklama                        |
+|-----------------|---------------|---------------------------------|
+| = 0             | 0             | ✅ **Hata yok** |
+| ≠ 0             | 1             | ⚠️ **Tek bit hatası** (düzeltilebilir) |
+| ≠ 0             | 0             | ❌ **Çift bit hatası** (düzeltilemez) |
+| = 0             | 1             | ⚠️ **Genel parite hatası** (veri bütünlüğü bozulmuş olabilir) |
